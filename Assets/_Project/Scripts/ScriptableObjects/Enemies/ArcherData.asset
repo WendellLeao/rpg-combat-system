@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ArcherData
   m_EditorClassIdentifier: 
   MaxHealth: 10
-  AttackForce: 30
+  AttackForce: 25
   CriticalChance: 0
   Armor: 8
