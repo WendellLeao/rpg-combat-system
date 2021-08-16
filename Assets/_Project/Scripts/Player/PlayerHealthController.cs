@@ -4,10 +4,14 @@ public sealed class PlayerHealthController : Player, IDamageable
 {
 	[Header("Health System")]
 	[SerializeField] private int _maxHealth;
+
+	private HealthSystem _healthSystem;
 	
 	public void TakeDamage(int damageAmount)
 	{
 		_healthSystem.Damage(damageAmount);
+		
+		RaiseOnPlayerGetHittedEvent();
 	}
 
 	protected override void Initialize()
@@ -22,8 +26,11 @@ public sealed class PlayerHealthController : Player, IDamageable
 		_healthSystem = new HealthSystem(_maxHealth);
 	}
 
-	private void Update()
+	private void RaiseOnPlayerGetHittedEvent()
 	{
-		Debug.Log(_healthSystem.GetCurrentHealthAmount());
+		int maxHealthAmount = _healthSystem.GetMaxHealthAmount();
+		int currentHealthAmount = _healthSystem.GetCurrentHealthAmount();
+		
+		_localGameEvents.OnPlayerGetHitted?.Invoke(currentHealthAmount, maxHealthAmount);
 	}
 }

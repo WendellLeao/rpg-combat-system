@@ -16,7 +16,7 @@ public sealed class PlayerMovement : Player
 
 	private void HandleMovement()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(1))
 		{
 			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 

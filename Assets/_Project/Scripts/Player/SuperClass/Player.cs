@@ -2,8 +2,9 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
-	protected HealthSystem _healthSystem;
-
+	[Header("Game Events")]
+	[SerializeField] protected LocalGameEvents _localGameEvents;
+	
 	protected virtual void Initialize()
 	{
 		
