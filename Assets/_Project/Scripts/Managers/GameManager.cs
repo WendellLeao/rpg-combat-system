@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RPG.Managers
@@ -16,6 +17,26 @@ namespace RPG.Managers
         protected virtual void OnDisable()
         {
             RemoveEventListeners();
+        }
+
+        protected virtual void Initialize()
+        {
+            
+        }
+
+        protected void StopGame()
+        {
+            Time.timeScale = 0;
+        }
+
+        protected void ResumeGame()
+        {
+            Time.timeScale = 1;
+        }
+
+        private void Start()
+        {
+            Initialize();
         }
     }
 }

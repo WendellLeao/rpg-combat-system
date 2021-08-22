@@ -11,16 +11,21 @@ namespace RPG.Managers
 
 		[SerializeField] private MainMenuController _mainMenuController;
 
-		[SerializeField] private DifficultyMenuController _difficultyMenuController;
-		
+		protected override void Initialize()
+		{
+			StopGame();
+			
+			ShowMenu(MenuType.MAIN);
+		}
+
 		protected override void AddEventListeners()
 		{
-			_mainMenuController.OnPlayIsPressed += OnPlayIsPressed_ShowDifficultyMenu;
+			_mainMenuController.OnPlayIsPressed += delegate { ShowMenu(MenuType.DIFFICULTY); };
 		}
 
 		protected override void RemoveEventListeners()
 		{
-			_mainMenuController.OnPlayIsPressed -= OnPlayIsPressed_ShowDifficultyMenu;
+			_mainMenuController.OnPlayIsPressed -= delegate { ShowMenu(MenuType.DIFFICULTY); };
 		}
 		
 		private void ShowMenu(MenuType menuType)
@@ -32,15 +37,8 @@ namespace RPG.Managers
 				if (menuType == menuController.GetMenuType())
 				{
 					menuController.ShowMenu();
-
-					return;
 				}
 			}
-		}
-
-		private void OnPlayIsPressed_ShowDifficultyMenu()
-		{
-			ShowMenu(MenuType.DIFFICULTY);
 		}
 	}
 }
