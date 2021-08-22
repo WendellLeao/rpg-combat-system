@@ -1,28 +1,31 @@
 using UnityEngine.AI;
 using UnityEngine;
 
-public sealed class PlayerMovement : Player
+namespace RPG.Player.Inputs
 {
-	[Header("Camera")]
-	[SerializeField] private Camera _camera;
+	public sealed class PlayerMovement : Player
+	{
+		[Header("Camera")]
+		[SerializeField] private Camera _camera;
 
-	[Header("A.I")]
-	[SerializeField] private NavMeshAgent _navMeshAgent;
+		[Header("A.I")]
+		[SerializeField] private NavMeshAgent _navMeshAgent;
 	
-	private void Update()
-	{
-		HandleMovement();
-	}
-
-	private void HandleMovement()
-	{
-		if (Input.GetMouseButtonDown(1))
+		private void Update()
 		{
-			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+			HandleMovement();
+		}
 
-			if (Physics.Raycast(ray, out RaycastHit hit))
+		private void HandleMovement()
+		{
+			if (Input.GetMouseButtonDown(1))
 			{
-				_navMeshAgent.SetDestination(hit.point);
+				Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+
+				if (Physics.Raycast(ray, out RaycastHit hit))
+				{
+					_navMeshAgent.SetDestination(hit.point);
+				}
 			}
 		}
 	}

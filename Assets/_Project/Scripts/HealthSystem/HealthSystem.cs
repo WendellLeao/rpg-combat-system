@@ -1,46 +1,49 @@
-public sealed class HealthSystem
+namespace RPG.Systems.Health
 {
-	private int _maxHealthAmount, _currentHealthAmount;
-
-	public HealthSystem(int maxHealthAmount)
+	public sealed class HealthSystem
 	{
-		_maxHealthAmount = maxHealthAmount;
+		private int _maxHealthAmount, _currentHealthAmount;
 
-		_currentHealthAmount = maxHealthAmount;
-	}
-
-	public void Damage(int damageAmount)
-	{
-		_currentHealthAmount -= damageAmount;
-
-		if (_currentHealthAmount <= 0)
+		public HealthSystem(int maxHealthAmount)
 		{
-			_currentHealthAmount = 0;
+			_maxHealthAmount = maxHealthAmount;
+
+			_currentHealthAmount = maxHealthAmount;
 		}
-	}
 
-	public void AddHealth(int healthAmount)
-	{
-		_currentHealthAmount += healthAmount;
+		public void Damage(int damageAmount)
+		{
+			_currentHealthAmount -= damageAmount;
 
-		if (_currentHealthAmount >= _maxHealthAmount)
+			if (_currentHealthAmount <= 0)
+			{
+				_currentHealthAmount = 0;
+			}
+		}
+
+		public void AddHealth(int healthAmount)
+		{
+			_currentHealthAmount += healthAmount;
+
+			if (_currentHealthAmount >= _maxHealthAmount)
+			{
+				_currentHealthAmount = _maxHealthAmount;
+			}
+		}
+
+		public void ResetCurrentHealthAmount()
 		{
 			_currentHealthAmount = _maxHealthAmount;
 		}
-	}
 
-	public void ResetCurrentHealthAmount()
-	{
-		_currentHealthAmount = _maxHealthAmount;
-	}
+		public int GetCurrentHealthAmount()
+		{
+			return _currentHealthAmount;
+		}
 
-	public int GetCurrentHealthAmount()
-	{
-		return _currentHealthAmount;
-	}
-
-	public int GetMaxHealthAmount()
-	{
-		return _maxHealthAmount;
+		public int GetMaxHealthAmount()
+		{
+			return _maxHealthAmount;
+		}
 	}
 }

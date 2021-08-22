@@ -1,36 +1,40 @@
+using RPG.Systems.Health;
 using UnityEngine;
 
-public sealed class PlayerHealthController : Player, IDamageable
+namespace RPG.Player
 {
-	[Header("Health System")]
-	[SerializeField] private int _maxHealth;
+	public sealed class PlayerHealthController : Player, IDamageable
+	{
+		[Header("Health System")]
+		[SerializeField] private int _maxHealth;
 
-	private HealthSystem _healthSystem;
+		private HealthSystem _healthSystem;
 	
-	public void TakeDamage(int damageAmount)
-	{
-		_healthSystem.Damage(damageAmount);
+		public void TakeDamage(int damageAmount)
+		{
+			_healthSystem.Damage(damageAmount);
 		
-		RaiseOnPlayerGetHittedEvent();
-	}
+			RaiseOnPlayerGetHittedEvent();
+		}
 
-	protected override void Initialize()
-	{
-		base.Initialize();
+		protected override void Initialize()
+		{
+			base.Initialize();
 		
-		InitializeHealthSystem();
-	}
+			InitializeHealthSystem();
+		}
 
-	private void InitializeHealthSystem()
-	{
-		_healthSystem = new HealthSystem(_maxHealth);
-	}
+		private void InitializeHealthSystem()
+		{
+			_healthSystem = new HealthSystem(_maxHealth);
+		}
 
-	private void RaiseOnPlayerGetHittedEvent()
-	{
-		int maxHealthAmount = _healthSystem.GetMaxHealthAmount();
-		int currentHealthAmount = _healthSystem.GetCurrentHealthAmount();
+		private void RaiseOnPlayerGetHittedEvent()
+		{
+			int maxHealthAmount = _healthSystem.GetMaxHealthAmount();
+			int currentHealthAmount = _healthSystem.GetCurrentHealthAmount();
 		
-		_localGameEvents.OnPlayerGetHitted?.Invoke(currentHealthAmount, maxHealthAmount);
+			_localGameEvents.OnPlayerGetHitted?.Invoke(currentHealthAmount, maxHealthAmount);
+		}
 	}
 }

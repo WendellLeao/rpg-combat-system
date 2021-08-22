@@ -1,4 +1,7 @@
-public interface IDamageable
+namespace RPG
 {
-	void TakeDamage(int damageAmount);
+	public interface IDamageable
+	{
+		void TakeDamage(int damageAmount);
+	}
 }

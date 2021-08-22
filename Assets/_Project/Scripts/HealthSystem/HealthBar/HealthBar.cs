@@ -1,38 +1,42 @@
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
+using RPG.GameEvents;
 
-public sealed class HealthBar : MonoBehaviour
+namespace RPG.Health
 {
-	[Header("Game Events")]
-	[SerializeField] private LocalGameEvents _localGameEvents;
-
-	[Header("UI Elements")]
-	[SerializeField] private Image _healthBarImage;
-
-	private void OnEnable()
+	public sealed class HealthBar : MonoBehaviour
 	{
-		AddEventListeners();
-	}
+		[Header("Game Events")]
+		[SerializeField] private LocalGameEvents _localGameEvents;
 
-	private void OnDisable()
-	{
-		RemoveEventListeners();
-	}
+		[Header("UI Elements")]
+		[SerializeField] private Image _healthBarImage;
 
-	private void AddEventListeners()
-	{
-		_localGameEvents.OnPlayerGetHitted += OnPlayerGetHitted_UpdateHealthBar;
-	}
+		private void OnEnable()
+		{
+			AddEventListeners();
+		}
 
-	private void RemoveEventListeners()
-	{
-		_localGameEvents.OnPlayerGetHitted -= OnPlayerGetHitted_UpdateHealthBar;
-	}
+		private void OnDisable()
+		{
+			RemoveEventListeners();
+		}
 
-	private void OnPlayerGetHitted_UpdateHealthBar(int currentHealthAmount, int maxHealthAmount)
-	{
-		float healthPercent = (float) currentHealthAmount / maxHealthAmount;
+		private void AddEventListeners()
+		{
+			_localGameEvents.OnPlayerGetHitted += OnPlayerGetHitted_UpdateHealthBar;
+		}
 
-		_healthBarImage.fillAmount = healthPercent;
+		private void RemoveEventListeners()
+		{
+			_localGameEvents.OnPlayerGetHitted -= OnPlayerGetHitted_UpdateHealthBar;
+		}
+
+		private void OnPlayerGetHitted_UpdateHealthBar(int currentHealthAmount, int maxHealthAmount)
+		{
+			float healthPercent = (float) currentHealthAmount / maxHealthAmount;
+
+			_healthBarImage.fillAmount = healthPercent;
+		}
 	}
 }

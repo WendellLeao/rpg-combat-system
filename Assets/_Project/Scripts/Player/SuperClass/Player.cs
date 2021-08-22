@@ -1,17 +1,21 @@
+using RPG.GameEvents;
 using UnityEngine;
 
-public abstract class Player : MonoBehaviour
+namespace RPG.Player
 {
-	[Header("Game Events")]
-	[SerializeField] protected LocalGameEvents _localGameEvents;
-	
-	protected virtual void Initialize()
+	public abstract class Player : MonoBehaviour
 	{
+		[Header("Game Events")]
+		[SerializeField] protected LocalGameEvents _localGameEvents;
+	
+		protected virtual void Initialize()
+		{
 		
-	}
+		}
 	
-	private void Start()
-	{
-		Initialize();
+		private void Start()
+		{
+			Initialize();
+		}
 	}
 }
